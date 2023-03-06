@@ -21,6 +21,6 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/clienti', [clientiController::class, 'clienti']);
-Route::get('/ordini', [ordiniController::class, 'ordini']);
-Route::get('/fatture', [fattureController::class, 'fatture']);
+Route::get('/clienti', [ClientiController::class, 'clienti']);
+Route::get('/ordini', [OrdiniController::class, 'ordini']);
+Route::get('/fatture', [FattureController::class, 'fatture']);
