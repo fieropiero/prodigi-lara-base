@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\clientiController;
+use App\Http\Controllers\fattureController;
+use App\Http\Controllers\ordiniController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +15,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
+
+Route::get('/clienti', [clientiController::class, 'clienti']);
+Route::get('/ordini', [ordiniController::class, 'ordini']);
+Route::get('/fatture', [fattureController::class, 'fatture']);
