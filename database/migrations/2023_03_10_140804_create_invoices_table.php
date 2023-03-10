@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
+            $table->int('code');
+            $table->decimal('total',10,2);
+            $table->enum('payments',['Transfer','Card']);
             $table->timestamps();
         });
     }
