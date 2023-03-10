@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\clientiController;
-use App\Http\Controllers\fattureController;
-use App\Http\Controllers\ordiniController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +21,11 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/clienti', [clientiController::class, 'clienti']);
-Route::get('/ordini', [ordiniController::class, 'ordini']);
-Route::get('/fatture', [fattureController::class, 'fatture']);
+Route::get('/customers', [CustomerController::class, 'index']);
+Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');
+
+Route::get('/invoices', [InvoiceController::class, 'index']);
+Route::get('/invoices/create', [InvoiceController::class, 'create'])->name('invoices.create');
+
+Route::get('/orders', [OrderController::class, 'index']);
+Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
