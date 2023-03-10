@@ -11,8 +11,9 @@ class CustomerController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    {   
+        $customers = Customer::all();
+        return view('customers.index', ['customers'=>$customers,]);
     }
 
     /**
@@ -20,7 +21,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customers.create');
     }
 
     /**
