@@ -29,7 +29,16 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            "firstname"=>"required",
+            "lastname"=>"required"
+        ]);
+        Customer::create([
+            "firstname"=>$validated['firstname'],
+            "lastname"=>$validated['lastname'],
+            
+        ]);
+        return redirect(route('customers.index'))->with('message', 'Customer created succesfully');
     }
 
     /**
@@ -45,7 +54,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('customers.edit',["customer"=>$customer]);
     }
 
     /**
@@ -53,7 +62,16 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $validated = $request->validate([
+            "firstname"=>'required',
+            "lastname"=>'required'
+        ]);
+
+        $customer->firstname = $validated['firstname'];
+        $customer->lastname = $validated['lastname'];
+        $customer->save();
+        return redirect(route('customers.index'))->with('message', 'Customer modified succesfully');
+
     }
 
     /**
@@ -61,6 +79,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+        return redirect(route('customers.index'))->with('message', 'Customer deleted successfully');
     }
 }

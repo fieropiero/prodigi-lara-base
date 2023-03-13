@@ -29,7 +29,18 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            "code"=>"required",
+            "total"=>"required",
+            "payments"=>"required"
+        ]);
+        Invoice::create([
+            "code"=>$validated['code'],
+            "total"=>$validated['total'],
+            "payments"=>$validated['payments'],
+            
+        ]);
+        return redirect(route('invoices.index'))->with('message', 'Invoice created succesfully');
     }
 
     /**
@@ -45,7 +56,7 @@ class InvoiceController extends Controller
      */
     public function edit(Invoice $invoice)
     {
-        //
+        return view('invoices.edit', ["invoice"=>$invoice]);
     }
 
     /**
@@ -53,7 +64,18 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, Invoice $invoice)
     {
-        //
+        $validated = $request->validate([
+            "code"=>'required',
+            "total"=>'required',
+            "payments"=>'required'
+        ]);
+
+        $invoice->code = $validated['code'];
+        $invoice->total = $validated['total'];
+        $invoice->payments = $validated['payments'];
+        $invoice->save();
+        return redirect(route('invoices.index'))->with('message', 'Invoice modified succesfully');
+
     }
 
     /**
@@ -61,6 +83,7 @@ class InvoiceController extends Controller
      */
     public function destroy(Invoice $invoice)
     {
-        //
-    }
+        $invoice->delete();
+        return redirect(route('invoices.index'))->with('message', 'Invoice deleted successfully');
+   }
 }
